@@ -87,7 +87,7 @@ public final class Order extends EntityBase<OrderId> {
         items.forEach(item -> item.initialize(getId(), new OrderItemId(itemId.getAndIncrement())));
     }
 
-    public void validateOrder() {
+    public void validate() {
         validateInitialOrder();
         validateTotalPrice();
         validateItemsPrice();
@@ -147,20 +147,18 @@ public final class Order extends EntityBase<OrderId> {
         }
     }
 
-    public void pay(ErrorMessages errors) {
+    public void pay() {
         if (status != OrderStatus.PENDING) {
             throw new OrderDomainException("Order should be in PENDING status!");
         }
         this.status = OrderStatus.PAID;
-        updateErrors(errors);
     }
 
-    public void confirm(ErrorMessages errors) {
+    public void confirm() {
         if (status != OrderStatus.PAID) {
             throw new OrderDomainException("Order should be in PAID status!");
         }
         this.status = OrderStatus.CONFIRMED;
-        updateErrors(errors);
     }
 
     public void cancelling(ErrorMessages errors) {

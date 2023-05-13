@@ -94,6 +94,14 @@
         <artifactId>restaurant</artifactId>
         <version>${meal.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -126,6 +134,13 @@
       <version>${mapstruct.version}</version>
       <scope>provided</scope>
     </dependency>
+
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-core</artifactId>
+    </dependency>
+
     <!-- Tests -->
     <dependency>
       <groupId>org.assertj</groupId>

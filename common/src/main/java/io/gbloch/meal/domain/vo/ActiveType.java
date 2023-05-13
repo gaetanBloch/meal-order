@@ -27,5 +27,5 @@ import io.gbloch.meal.core.annotations.ddd.ValueObject;
 @ValueObject
 public enum ActiveType {
     ACTIVE,
-    INACTIVE
+    INACTIVE,
 }

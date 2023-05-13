@@ -31,6 +31,7 @@ import lombok.Getter;
 @Getter
 @AggregateRoot
 public final class Customer extends EntityBase<CustomerId> {
+
     private final Identity identity;
 
     private Customer(CustomerId id, Identity identity) {
@@ -53,16 +54,17 @@ public final class Customer extends EntityBase<CustomerId> {
     }
 
     public static class CustomerBuilder {
+
         private CustomerId id;
         private Identity identity;
 
-        CustomerBuilder() {
-        }
+        CustomerBuilder() {}
 
         public CustomerBuilder id(CustomerId id) {
             this.id = id;
             return this;
         }
+
         public CustomerBuilder identity(Identity identity) {
             this.identity = identity;
             return this;

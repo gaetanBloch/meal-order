@@ -16,22 +16,14 @@
 
 package io.gbloch.meal.domain.event;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
- * DomainEvent.
+ * SourceType.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@NoArgsConstructor
-public abstract class DomainEvent<T> {
-
-    protected EventHeader header;
-    protected String name;
-    protected T payload;
+public enum EventSourceType {
+    ORDER,
+    CUSTOMER,
+    RESTAURANT,
 }

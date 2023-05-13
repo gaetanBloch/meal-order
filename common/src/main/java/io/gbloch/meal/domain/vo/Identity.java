@@ -25,5 +25,4 @@ import io.gbloch.meal.core.annotations.ddd.ValueObject;
  * <br>Created on 13/05/2023
  */
 @ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-}
+public record Identity(String userName, String firstName, String lastName) {}

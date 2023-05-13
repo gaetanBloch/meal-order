@@ -32,6 +32,7 @@ import lombok.Getter;
 @Getter
 @AggregateRoot
 public final class Restaurant extends EntityBase<RestaurantId> {
+
     private final List<Product> products;
     private final ActiveType active;
 
@@ -56,12 +57,12 @@ public final class Restaurant extends EntityBase<RestaurantId> {
     }
 
     public static class RestaurantBuilder {
+
         private RestaurantId id;
         private List<Product> products;
         private ActiveType active;
 
-        RestaurantBuilder() {
-        }
+        RestaurantBuilder() {}
 
         public RestaurantBuilder id(RestaurantId id) {
             this.id = id;
@@ -79,7 +80,7 @@ public final class Restaurant extends EntityBase<RestaurantId> {
         }
 
         public Restaurant build() {
-            return new Restaurant(this.id,this.products, this.active);
+            return new Restaurant(this.id, this.products, this.active);
         }
     }
 }

@@ -14,24 +14,25 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.event;
+package io.gbloch.meal.order.domain.event;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.gbloch.meal.domain.event.DomainEvent;
+import io.gbloch.meal.domain.event.EventHeader;
+import io.gbloch.meal.order.domain.entity.Order;
 
 /**
- * DomainEvent.
+ * OrderPaidEvent.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@NoArgsConstructor
-public abstract class DomainEvent<T> {
+public final class OrderPaidEvent extends DomainEvent<Order> {
 
-    protected EventHeader header;
-    protected String name;
-    protected T payload;
+    public static final String ORDER_PAID_EVENT = "OrderPaidEvent";
+
+    public OrderPaidEvent(Order payload) {
+        this.setName(ORDER_PAID_EVENT);
+        this.setPayload(payload);
+        this.setHeader(EventHeader.of());
+    }
 }

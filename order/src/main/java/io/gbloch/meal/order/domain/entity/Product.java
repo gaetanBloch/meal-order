@@ -31,11 +31,16 @@ import lombok.Getter;
 @Getter
 public final class Product extends EntityBase<ProductId> {
 
-    private final ProductLabel label;
-    private final Money price;
+    private ProductLabel label;
+    private Money price;
 
     private Product(ProductId productId, ProductLabel label, Money price) {
         super(productId);
+        this.label = label;
+        this.price = price;
+    }
+
+    public void updateProductInfo(ProductLabel label, Money price) {
         this.label = label;
         this.price = price;
     }
@@ -55,12 +60,12 @@ public final class Product extends EntityBase<ProductId> {
     }
 
     public static class ProductBuilder {
+
         private ProductId productId;
         private ProductLabel label;
         private Money price;
 
-        ProductBuilder() {
-        }
+        ProductBuilder() {}
 
         public ProductBuilder productId(ProductId productId) {
             this.productId = productId;
