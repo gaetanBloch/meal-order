@@ -1,0 +1,381 @@
+<?xml version="1.0" ?>
+<project
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.gbloch.meal</groupId>
+  <artifactId>meal-parent</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <!-- Actual project version -->
+    <revision>1.0.0-SNAPSHOT</revision>
+    <meal.version>${revision}</meal.version>
+
+    <!-- Java version -->
+    <java.version>17</java.version>
+
+    <!-- Encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Maven versions and plugins -->
+    <maven.version>3.9.1</maven.version>
+    <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <maven-wrapper-plugin.version>3.2.0</maven-wrapper-plugin.version>
+    <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <maven-versions-plugin.version>2.7</maven-versions-plugin.version>
+    <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+    <maven-build-cache-extension.version>1.0.0</maven-build-cache-extension.version>
+    <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
+    <jandex-maven-plugin.version>3.1.1</jandex-maven-plugin.version>
+    <flatten-maven-plugin.version>1.4.1</flatten-maven-plugin.version>
+
+    <skipTests>false</skipTests>
+    <skipITs>true</skipITs>
+
+    <!-- Quarkus -->
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>3.0.3.Final</quarkus.platform.version>
+
+    <!-- Misc -->
+    <lombok.version>1.18.26</lombok.version>
+    <mapstruct.version>1.5.5.Final</mapstruct.version>
+
+    <!-- Tests -->
+    <assertj-core.version>3.24.2</assertj-core.version>
+    <awaitility.version>4.2.0</awaitility.version>
+    <jacoco.version>0.8.9</jacoco.version>
+    <junit-jupiter-params.version>5.9.3</junit-jupiter-params.version>
+  </properties>
+
+  <modules>
+    <module>common</module>
+    <module>order</module>
+    <module>customer</module>
+    <module>payment</module>
+    <module>restaurant</module>
+  </modules>
+
+  <dependencies>
+    <!-- Quarkus -->
+    <dependency>
+      <groupId>${quarkus.platform.group-id}</groupId>
+      <artifactId>${quarkus.platform.artifact-id}</artifactId>
+      <version>${quarkus.platform.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Mapstruct -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${mapstruct.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <version>${mapstruct.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Tests -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>${awaitility.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit-jupiter-params.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <!-- Maven Build Cache -->
+      <extension>
+        <groupId>org.apache.maven.extensions</groupId>
+        <artifactId>maven-build-cache-extension</artifactId>
+        <version>${maven-build-cache-extension.version}</version>
+      </extension>
+    </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <!-- https://maven.apache.org/plugins/quarkus-maven-plugin/ -->
+        <plugin>
+          <groupId>${quarkus.platform.group-id}</groupId>
+          <artifactId>quarkus-maven-plugin</artifactId>
+          <version>${quarkus.platform.version}</version>
+          <extensions>true</extensions>
+          <executions>
+            <execution>
+              <goals>
+                <goal>build</goal>
+                <goal>generate-code</goal>
+                <goal>generate-code-tests</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <jvmArgs>
+              --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+              --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+              --add-opens jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+              --add-opens jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED
+            </jvmArgs>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>io.smallrye</groupId>
+          <artifactId>jandex-maven-plugin</artifactId>
+          <version>${jandex-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>make-index</id>
+              <goals>
+                <goal>jandex</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <!-- https://maven.apache.org/plugins/maven-wrapper-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-wrapper-plugin</artifactId>
+        <version>${maven-wrapper-plugin.version}</version>
+      </plugin>
+      <!-- https://maven.apache.org/enforcer/maven-enforcer-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven-enforcer-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>enforce-dependencyConvergence</id>
+            <configuration>
+              <rules>
+                <DependencyConvergence/>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <rules>
+            <requireMavenVersion>
+              <message>
+                You are running an older version of Maven. The project requires at least Maven
+                ${maven.version}
+              </message>
+              <version>[${maven.version},)</version>
+            </requireMavenVersion>
+            <requireJavaVersion>
+              <message>
+                You are running an incompatible version of Java. The project supports JDK 17 to
+                20.
+              </message>
+              <version>[17,21)</version>
+            </requireJavaVersion>
+          </rules>
+        </configuration>
+      </plugin>
+
+      <!-- https://maven.apache.org/plugins/maven-compiler-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-parameters</arg>
+            <arg>-XDcompilePolicy=simple</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${mapstruct.version}</version>
+            </path>
+            <path>
+              <groupId>io.quarkus</groupId>
+              <artifactId>quarkus-extension-processor</artifactId>
+              <version>${quarkus.platform.version}</version>
+            </path>
+          </annotationProcessorPaths>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <!-- https://maven.apache.org/plugins/maven-surefire-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <phase>test</phase>
+            <configuration>
+              <properties>
+                <configurationParameters>
+                  cucumber.junit-platform.naming-strategy=long
+                </configurationParameters>
+              </properties>
+              <systemPropertyVariables>
+                <java.util.logging.manager>
+                  org.jboss.logmanager.LogManager
+                </java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+              </systemPropertyVariables>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- https://maven.apache.org/plugins/maven-failsafe-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <systemPropertyVariables>
+                <native.image.path>
+                  ${project.build.directory}/${project.build.finalName}-runner
+                </native.image.path>
+                <java.util.logging.manager>
+                  org.jboss.logmanager.LogManager
+                </java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+                <quarkus.test.arg-line>${argLine}</quarkus.test.arg-line>
+                <quarkus.test.profile>integration</quarkus.test.profile>
+              </systemPropertyVariables>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Flatten POM -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>${flatten-maven-plugin.version}</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <!-- enable flattening -->
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <!-- ensure proper cleanup -->
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <!-- Docker -->
+    <profile>
+      <id>docker</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- Native -->
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <skipITs>false</skipITs>
+        <quarkus.package.type>native</quarkus.package.type>
+      </properties>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,27 @@
+# Prettier configuration
+
+printWidth: 100
+singleQuote: true
+tabWidth: 2
+useTabs: false
+endOfLine: 'lf'
+semi: true
+trailingComma: 'all'
+bracketSpacing: true
+bracketSameLine: false
+htmlWhitespaceSensitivity: 'css'
+embeddedLanguageFormatting: auto
+singleAttributePerLine: false
+
+# js and ts rules:
+arrowParens: avoid
+
+# xml rules:
+xmlWhitespaceSensitivity: ignore
+
+# java rules:
+overrides:
+  - files: '*.java'
+    options:
+      tabWidth: 4
+      singleQuote: false

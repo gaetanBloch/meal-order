@@ -1,0 +1,21 @@
+{
+  "name": "meal-order",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --write \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\"",
+    "format:check": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --check \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\""
+  },
+  "keywords": [],
+  "author": "Gaetan Bloch",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@prettier/plugin-xml": "^2.2.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-java": "^2.1.0",
+    "prettier-plugin-packagejson": "^2.4.3",
+    "prettier-plugin-sh": "^0.12.8",
+    "prettier-plugin-sql": "^0.14.0"
+  }
+}
