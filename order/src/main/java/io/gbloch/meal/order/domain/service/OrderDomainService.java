@@ -24,6 +24,7 @@ import io.gbloch.meal.order.domain.error.OrderDomainException;
 import io.gbloch.meal.order.domain.event.OrderCancelledEvent;
 import io.gbloch.meal.order.domain.event.OrderCreatedEvent;
 import io.gbloch.meal.order.domain.event.OrderPaidEvent;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br>Created on 13/05/2023
  */
 @Slf4j
+@ApplicationScoped
 public final class OrderDomainService {
 
     public OrderCreatedEvent createOrder(Order order, Restaurant restaurant) {
@@ -88,7 +90,7 @@ public final class OrderDomainService {
     }
 
     public OrderCancelledEvent cancelOrder(Order order, ErrorMessages errorMessages) {
-        order.cancel( errorMessages);
+        order.cancel(errorMessages);
         log.info("Order {} cancelled", order.getId().getValue());
         return new OrderCancelledEvent(order);
     }

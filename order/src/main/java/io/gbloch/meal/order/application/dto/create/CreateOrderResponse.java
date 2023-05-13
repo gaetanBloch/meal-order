@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.dto.create;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.domain.vo.OrderStatus;
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+import lombok.Builder;
 
 /**
- * Identity.
+ * CreateOrderResponse.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
-}
+@Builder
+public record CreateOrderResponse(
+    @NotNull UUID orderTrackingId,
+    @NotNull OrderStatus orderStatus,
+    @NotNull String message
+) {}

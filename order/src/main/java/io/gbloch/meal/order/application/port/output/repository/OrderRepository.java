@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.port.output.repository;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.application.port.output.repository.Repository;
+import io.gbloch.meal.domain.vo.OrderId;
+import io.gbloch.meal.order.domain.entity.Order;
+import io.gbloch.meal.order.domain.vo.TrackingId;
+import java.util.Optional;
 
 /**
- * Identity.
+ * OrderRepository.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
+public interface OrderRepository extends Repository<OrderId, Order> {
+    Optional<Order> findByTrackingId(TrackingId trackingId);
 }

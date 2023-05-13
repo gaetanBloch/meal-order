@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.port.input.restaurant;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.order.application.dto.message.RestaurantResponse;
 
 /**
- * Identity.
+ * RestaurantApprovedUseCase.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
+public interface RestaurantApprovedUseCase {
+    void orderApproved(RestaurantResponse response);
 }

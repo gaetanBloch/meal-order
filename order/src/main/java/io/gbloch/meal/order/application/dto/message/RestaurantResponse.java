@@ -14,22 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.dto.message;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.domain.vo.PaymentStatus;
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
 
 /**
- * Identity.
+ * RestaurantResponse.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
-}
+public record RestaurantResponse(
+    String id,
+    String orderId,
+    String restaurantId,
+    String paymentId,
+    String customerId,
+    BigDecimal price,
+    Instant createdAt,
+    PaymentStatus paymentStatus,
+    List<String> errorMessages
+) {}

@@ -14,22 +14,26 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.application.error;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import java.io.Serial;
 
 /**
- * Identity.
+ * ApplicationException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
+public class ApplicationException extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = -8744905087696688398L;
+
+    protected ApplicationException(String message) {
+        super(message);
+    }
+
+    protected ApplicationException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

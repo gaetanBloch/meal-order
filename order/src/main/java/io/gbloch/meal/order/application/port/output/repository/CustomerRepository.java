@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.port.output.repository;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.application.port.output.repository.Repository;
+import io.gbloch.meal.domain.vo.CustomerId;
+import io.gbloch.meal.order.domain.entity.Customer;
 
 /**
- * Identity.
+ * CustomerRepository.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
-}
+public interface CustomerRepository extends Repository<CustomerId, Customer> {}

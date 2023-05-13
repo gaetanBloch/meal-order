@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
-
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+package io.gbloch.meal.domain.event;
 
 /**
- * Identity.
+ * DomainEventPublisher.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
+public interface DomainEventPublisher<T, E extends DomainEvent<T>> {
+    void publish(E event);
 }

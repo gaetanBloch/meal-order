@@ -14,22 +14,28 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.message;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.order.application.dto.message.RestaurantResponse;
+import io.gbloch.meal.order.application.port.input.restaurant.RestaurantApprovedUseCase;
+import io.gbloch.meal.order.application.port.input.restaurant.RestaurantRejectedUseCase;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Identity.
+ * RestaurantMessageHandler.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
+@ApplicationScoped
+@Slf4j
+public final class RestaurantMessageHandler
+    implements RestaurantApprovedUseCase, RestaurantRejectedUseCase {
+
+    @Override
+    public void orderApproved(RestaurantResponse response) {}
+
+    @Override
+    public void orderRejected(RestaurantResponse response) {}
 }

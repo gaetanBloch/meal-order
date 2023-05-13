@@ -17,6 +17,7 @@
 package io.gbloch.meal.domain.vo;
 
 import io.gbloch.meal.core.annotations.ddd.ValueObject;
+import io.gbloch.meal.core.validation.Validation;
 
 /**
  * Address.
@@ -25,4 +26,11 @@ import io.gbloch.meal.core.annotations.ddd.ValueObject;
  * <br>Created on 13/05/2023
  */
 @ValueObject
-public record Address(String street, String city, String zipCode, String country) {}
+public record Address(String street, String city, String zipCode, String country) {
+    public Address {
+        Validation.field("street", street).notBlank().maxLength(255);
+        Validation.field("city", city).notBlank().maxLength(255);
+        Validation.field("zipCode", zipCode).notBlank().maxLength(10);
+        Validation.field("country", country).notBlank().maxLength(255);
+    }
+}

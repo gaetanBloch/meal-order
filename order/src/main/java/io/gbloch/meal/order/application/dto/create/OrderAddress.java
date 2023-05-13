@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.dto.create;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 /**
- * Identity.
+ * OrderAddress.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
-    }
-}
+@Builder
+public record OrderAddress(
+    @NotNull @Max(255) String street,
+    @NotNull @Max(255) String city,
+    @NotNull @Max(10) String zipCode,
+    @NotNull @Max(255) String country
+) {}

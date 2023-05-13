@@ -16,10 +16,18 @@
 
 package io.gbloch.meal.order.domain.vo;
 
+import io.gbloch.meal.domain.vo.IdBase;
+import java.util.UUID;
+
 /**
  * TrackingId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class TrackingId extends Id {}
+public final class TrackingId extends IdBase<UUID> {
+
+    public TrackingId(UUID value) {
+        super(value);
+    }
+}

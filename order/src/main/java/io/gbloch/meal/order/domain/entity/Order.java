@@ -29,6 +29,7 @@ import io.gbloch.meal.order.domain.error.OrderDomainException;
 import io.gbloch.meal.order.domain.vo.OrderItemId;
 import io.gbloch.meal.order.domain.vo.TrackingId;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.Getter;
 
@@ -76,7 +77,7 @@ public final class Order extends EntityBase<OrderId> {
 
     public void initialize() {
         setId(new OrderId());
-        trackingId = new TrackingId();
+        trackingId = new TrackingId(UUID.randomUUID());
         this.status = OrderStatus.PENDING;
 
         initializeItems();

@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.application.error;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import io.gbloch.meal.application.error.ApplicationException;
 
 /**
- * Identity.
+ * OrderApplicationException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@ValueObject
-public record Identity(String userName, String firstName, String lastName) {
-    public Identity {
-        Validation.field("userName", userName).notBlank().maxLength(255);
-        Validation.field("firstName", firstName).notBlank().maxLength(255);
-        Validation.field("lastName", lastName).notBlank().maxLength(255);
+public final class OrderApplicationException extends ApplicationException {
+
+    public OrderApplicationException(String message) {
+        super(message);
+    }
+
+    public OrderApplicationException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

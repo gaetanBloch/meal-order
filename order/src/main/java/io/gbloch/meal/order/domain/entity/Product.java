@@ -40,6 +40,10 @@ public final class Product extends EntityBase<ProductId> {
         this.price = price;
     }
 
+    public Product(ProductId productId) {
+        super(productId);
+    }
+
     public void updateProductInfo(ProductLabel label, Money price) {
         this.label = label;
         this.price = price;
