@@ -14,31 +14,12 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
-
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+package io.gbloch.meal.order.domain.vo;
 
 /**
- * BaseId.
+ * TrackingId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
-
-    public static final String ID_FIELD = "id";
-
-    @EqualsAndHashCode.Include
-    private final T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
-}
+public final class TrackingId extends Id {}

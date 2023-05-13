@@ -14,31 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.order.domain.error;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import io.gbloch.meal.domain.error.DomainException;
+import java.io.Serial;
 
 /**
- * BaseId.
+ * OrderDomainException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+public final class OrderDomainException extends DomainException {
 
-    public static final String ID_FIELD = "id";
+    @Serial
+    private static final long serialVersionUID = 4340273686983400156L;
 
-    @EqualsAndHashCode.Include
-    private final T value;
+    public OrderDomainException(String message) {
+        super(message);
+    }
 
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
+    public OrderDomainException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

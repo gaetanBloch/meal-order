@@ -16,29 +16,21 @@
 
 package io.gbloch.meal.domain.vo;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.UUID;
 
 /**
- * BaseId.
+ * RestaurantId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+public final class RestaurantId extends IdBase<UUID> {
 
-    public static final String ID_FIELD = "id";
+    public RestaurantId(UUID value) {
+        super(value);
+    }
 
-    @EqualsAndHashCode.Include
-    private final T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
+    public RestaurantId() {
+        super(UUID.randomUUID());
     }
 }

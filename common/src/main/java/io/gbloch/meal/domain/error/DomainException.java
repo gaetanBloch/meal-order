@@ -14,31 +14,26 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.domain.error;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serial;
 
 /**
- * BaseId.
+ * DomainException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+public class DomainException extends RuntimeException {
 
-    public static final String ID_FIELD = "id";
+    @Serial
+    private static final long serialVersionUID = -912914024961756387L;
 
-    @EqualsAndHashCode.Include
-    private final T value;
+    public DomainException(String message) {
+        super(message);
+    }
 
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
+    public DomainException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

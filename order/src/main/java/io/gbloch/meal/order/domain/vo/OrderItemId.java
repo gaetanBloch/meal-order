@@ -14,34 +14,19 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.entity;
+package io.gbloch.meal.order.domain.vo;
 
-import io.gbloch.meal.domain.vo.Id;
-import java.util.UUID;
+import io.gbloch.meal.domain.vo.IdBase;
 
 /**
- * AggregateRoot.
+ * OrderItemId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public class AggregateRoot extends EntityBase<UUID, Id> {
+public final class OrderItemId extends IdBase<Long> {
 
-    protected AggregateRoot() {
-        super(Id.withoutId());
-    }
-
-    public void setId(UUID id) {
-        this.id = Id.withId(id);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public OrderItemId(Long value) {
+        super(value);
     }
 }

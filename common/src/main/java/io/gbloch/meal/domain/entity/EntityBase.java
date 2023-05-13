@@ -16,27 +16,25 @@
 
 package io.gbloch.meal.domain.entity;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * EntityBase.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-
-import io.gbloch.meal.domain.vo.IdBase;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class EntityBase<T, ID extends IdBase<T>> {
+public abstract class EntityBase<T> {
 
     @EqualsAndHashCode.Include
-    protected ID id;
+    private T id;
+
+    protected EntityBase(T id) {
+        this.id = id;
+    }
 }

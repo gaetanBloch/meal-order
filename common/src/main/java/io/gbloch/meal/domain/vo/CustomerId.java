@@ -16,31 +16,23 @@
 
 package io.gbloch.meal.domain.vo;
 
+import io.gbloch.meal.core.annotations.ddd.ValueObject;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
- * Id.
+ * CustomerId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@NoArgsConstructor
-public final class Id extends IdBase<UUID> {
+@ValueObject
+public final class CustomerId extends IdBase<UUID> {
 
-    private Id(UUID id) {
-        super(id);
+    public CustomerId(UUID value) {
+        super(value);
     }
 
-    public static Id withoutId() {
-        return new Id(UUID.randomUUID());
-    }
-
-    public static Id withId(UUID id) {
-        return new Id(id);
+    public CustomerId() {
+        super(UUID.randomUUID());
     }
 }
