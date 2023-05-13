@@ -2,14 +2,14 @@
   "name": "meal-order",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --write \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\"",
-    "format:check": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --check \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\""
-  },
   "keywords": [],
-  "author": "Gaetan Bloch",
   "license": "Apache-2.0",
+  "author": "Gaetan Bloch",
+  "scripts": {
+    "format": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --write \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\"",
+    "format:check": "prettier --plugin @prettier/plugin-xml --plugin prettier-plugin-sh --plugin prettier-plugin-java --plugin prettier-plugin-packagejson --plugin prettier-plugin-sql --check \"**/*.{sh,js,ts,css,scss,md,html,java,xml,sql,json,package.json}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "@prettier/plugin-xml": "^2.2.0",
     "prettier": "^2.8.8",

@@ -19,8 +19,7 @@
 
   <modules />
 
-  <dependencies>
-  </dependencies>
+  <dependencies />
 
   <build>
     <plugins>

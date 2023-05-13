@@ -67,6 +67,36 @@
     <module>restaurant</module>
   </modules>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.gbloch.meal</groupId>
+        <artifactId>common</artifactId>
+        <version>${meal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.gbloch.meal</groupId>
+        <artifactId>order</artifactId>
+        <version>${meal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.gbloch.meal</groupId>
+        <artifactId>customer</artifactId>
+        <version>${meal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.gbloch.meal</groupId>
+        <artifactId>payment</artifactId>
+        <version>${meal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.gbloch.meal</groupId>
+        <artifactId>restaurant</artifactId>
+        <version>${meal.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <!-- Quarkus -->
     <dependency>
@@ -177,7 +207,6 @@
     </pluginManagement>
 
     <plugins>
-
       <!-- https://maven.apache.org/plugins/maven-wrapper-plugin/ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -200,7 +229,7 @@
             <id>enforce-dependencyConvergence</id>
             <configuration>
               <rules>
-                <DependencyConvergence/>
+                <DependencyConvergence />
               </rules>
               <fail>true</fail>
             </configuration>
