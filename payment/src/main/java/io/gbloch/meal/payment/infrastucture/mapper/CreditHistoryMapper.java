@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.payment.application.port.output.repository;
+package io.gbloch.meal.payment.infrastucture.mapper;
 
-import io.gbloch.meal.application.port.output.repository.Repository;
-import io.gbloch.meal.domain.vo.CustomerId;
 import io.gbloch.meal.payment.domain.entity.CreditHistory;
-import io.gbloch.meal.payment.domain.vo.CreditHistoryId;
-import java.util.List;
+import io.gbloch.meal.payment.infrastucture.entity.CreditHistoryEntity;
+import org.mapstruct.Mapper;
 
 /**
- * CustomerRepository.
+ * CreditHistoryMapper.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
-public interface CreditHistoryRepository extends Repository<CreditHistoryId, CreditHistory> {
-    List<CreditHistory> findByCustomerId(CustomerId customerId);
+@Mapper(componentModel = "cdi")
+public interface CreditHistoryMapper {
+    CreditHistory toCreditHistory(CreditHistoryEntity entity);
+
+    CreditHistoryEntity toCreditHistoryEntity(CreditHistory creditHistory);
 }

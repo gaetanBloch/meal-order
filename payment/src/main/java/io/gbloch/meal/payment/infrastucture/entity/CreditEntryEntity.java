@@ -14,20 +14,35 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.payment.application.port.output.repository;
+package io.gbloch.meal.payment.infrastucture.entity;
 
-import io.gbloch.meal.application.port.output.repository.Repository;
-import io.gbloch.meal.domain.vo.CustomerId;
-import io.gbloch.meal.payment.domain.entity.CreditHistory;
-import io.gbloch.meal.payment.domain.vo.CreditHistoryId;
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * CustomerRepository.
+ * CreditEntry.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
-public interface CreditHistoryRepository extends Repository<CreditHistoryId, CreditHistory> {
-    List<CreditHistory> findByCustomerId(CustomerId customerId);
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "credit_entry")
+@Entity
+public class CreditEntryEntity {
+    @Id
+    private UUID id;
+    private UUID customerId;
+    private BigDecimal totalCreditAmount;
 }

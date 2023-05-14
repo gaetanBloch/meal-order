@@ -91,7 +91,7 @@ final class PaymentCommandHandler implements CompletePaymentUseCase, CancelPayme
     }
 
     private List<CreditHistory> getCreditHistory(CustomerId customerId) {
-        Optional<List<CreditHistory>> creditHistories = creditHistoryRepository.findByCustomerId(
+        List<CreditHistory> creditHistories = creditHistoryRepository.findByCustomerId(
             customerId
         );
         if (creditHistories.isEmpty()) {
@@ -100,7 +100,7 @@ final class PaymentCommandHandler implements CompletePaymentUseCase, CancelPayme
                 "Could not find credit history for customer: " + customerId.getValue()
             );
         }
-        return creditHistories.get();
+        return creditHistories;
     }
 
     private void persistAll(
