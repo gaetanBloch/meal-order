@@ -21,6 +21,7 @@ import io.gbloch.meal.domain.entity.EntityBase;
 import io.gbloch.meal.domain.vo.ActiveType;
 import io.gbloch.meal.domain.vo.RestaurantId;
 import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 
 /**
@@ -33,10 +34,10 @@ import lombok.Getter;
 @AggregateRoot
 public final class Restaurant extends EntityBase<RestaurantId> {
 
-    private final List<Product> products;
+    private final Set<Product> products;
     private final ActiveType active;
 
-    Restaurant(RestaurantId id, List<Product> products, ActiveType active) {
+    Restaurant(RestaurantId id, Set<Product> products, ActiveType active) {
         super(id);
         this.products = products;
         this.active = active;
@@ -59,7 +60,7 @@ public final class Restaurant extends EntityBase<RestaurantId> {
     public static class RestaurantBuilder {
 
         private RestaurantId id;
-        private List<Product> products;
+        private Set<Product> products;
         private ActiveType active;
 
         RestaurantBuilder() {}
@@ -69,7 +70,7 @@ public final class Restaurant extends EntityBase<RestaurantId> {
             return this;
         }
 
-        public RestaurantBuilder products(List<Product> products) {
+        public RestaurantBuilder products(Set<Product> products) {
             this.products = products;
             return this;
         }

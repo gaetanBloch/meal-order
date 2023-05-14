@@ -34,7 +34,7 @@ public final class Customer extends EntityBase<CustomerId> {
 
     private final Identity identity;
 
-    private Customer(CustomerId id, Identity identity) {
+    Customer(CustomerId id, Identity identity) {
         super(id);
         this.identity = identity;
     }

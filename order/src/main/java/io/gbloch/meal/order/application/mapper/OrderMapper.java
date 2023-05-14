@@ -32,6 +32,8 @@ import io.gbloch.meal.order.domain.entity.Restaurant;
 import io.gbloch.meal.order.domain.vo.Quantity;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * OrderMapper.
@@ -51,7 +53,7 @@ public final class OrderMapper {
                     .items()
                     .stream()
                     .map(orderItem -> new Product(new ProductId(orderItem.productId())))
-                    .toList()
+                    .collect(Collectors.toSet())
             )
             .build();
     }
@@ -61,7 +63,7 @@ public final class OrderMapper {
             .builder()
             .customerId(new CustomerId(createOrderCommand.customerId()))
             .restaurantId(new RestaurantId(createOrderCommand.restaurantId()))
-            .totalPrice(new Money(createOrderCommand.price()))
+            .price(new Money(createOrderCommand.price()))
             .items(toOrderItemEntities(createOrderCommand.items()))
             .deliveryAddress(toAddress(createOrderCommand.address()))
             .build();
@@ -78,14 +80,20 @@ public final class OrderMapper {
                     .product(new Product(new ProductId(item.productId())))
                     .price(new Money(item.price()))
                     .quantity(new Quantity(item.quantity()))
-                    .totalPrice(new Money(item.totalPrice()))
+                    .subTotal(new Money(item.totalPrice()))
                     .build()
             )
             .toList();
     }
 
     private Address toAddress(OrderAddress address) {
-        return new Address(address.street(), address.city(), address.zipCode(), address.country());
+        return new Address(
+            UUID.randomUUID(),
+            address.street(),
+            address.city(),
+            address.zipCode(),
+            address.country()
+        );
     }
 
     public CreateOrderResponse toOrderResponse(Order order, String message) {

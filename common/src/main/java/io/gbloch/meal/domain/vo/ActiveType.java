@@ -27,5 +27,9 @@ import io.gbloch.meal.core.annotations.ddd.ValueObject;
 @ValueObject
 public enum ActiveType {
     ACTIVE,
-    INACTIVE,
+    INACTIVE;
+
+    public static ActiveType mapBoolean(boolean active) {
+        return active ? ACTIVE : INACTIVE;
+    }
 }

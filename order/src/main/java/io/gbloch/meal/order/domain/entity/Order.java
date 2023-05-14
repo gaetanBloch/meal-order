@@ -46,19 +46,21 @@ public final class Order extends EntityBase<OrderId> {
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
     private final Address deliveryAddress;
-    private final Money totalPrice;
+    private final Money price;
     private final List<OrderItem> items;
 
     private TrackingId trackingId;
     private OrderStatus status;
     private ErrorMessages errors;
 
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
+
     private Order(OrderBuilder builder) {
         super(builder.id);
         this.customerId = builder.customerId;
         this.restaurantId = builder.restaurantId;
         this.deliveryAddress = builder.deliveryAddress;
-        this.totalPrice = builder.totalPrice;
+        this.price = builder.price;
         this.items = builder.items;
         this.trackingId = builder.trackingId;
         this.status = builder.status;
@@ -101,7 +103,7 @@ public final class Order extends EntityBase<OrderId> {
     }
 
     private void validateTotalPrice() {
-        if (totalPrice == null || !totalPrice.isGreaterThanZero()) {
+        if (price == null || !price.isGreaterThanZero()) {
             throw new OrderDomainException("The total price should be greater than zero!");
         }
     }
@@ -111,14 +113,14 @@ public final class Order extends EntityBase<OrderId> {
             .stream()
             .map(orderItem -> {
                 validateItemPrice(orderItem);
-                return orderItem.getTotalPrice();
+                return orderItem.getSubTotal();
             })
             .reduce(Money.ZERO, Money::add);
 
-        if (!totalPrice.equals(orderItemsTotal)) {
+        if (!price.equals(orderItemsTotal)) {
             throw new OrderDomainException(
                 "Total price: " +
-                totalPrice.amount() +
+                price.amount() +
                 " is not equal to Order items total: " +
                 orderItemsTotal.amount() +
                 "!"
@@ -188,7 +190,7 @@ public final class Order extends EntityBase<OrderId> {
         private CustomerId customerId;
         private RestaurantId restaurantId;
         private Address deliveryAddress;
-        private Money totalPrice;
+        private Money price;
         private List<OrderItem> items;
         private TrackingId trackingId;
         private OrderStatus status;
@@ -216,8 +218,8 @@ public final class Order extends EntityBase<OrderId> {
             return this;
         }
 
-        public OrderBuilder totalPrice(Money totalPrice) {
-            this.totalPrice = totalPrice;
+        public OrderBuilder price(Money totalPrice) {
+            this.price = totalPrice;
             return this;
         }
 

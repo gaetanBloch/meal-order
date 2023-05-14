@@ -155,6 +155,37 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-narayana-jta</artifactId>
     </dependency>
+    <!-- Messaging -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-apicurio-registry-avro</artifactId>
+    </dependency>
+    <!-- Web-->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
+    </dependency>
+    <!-- Persistence -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
 
     <!-- Tests -->
     <dependency>

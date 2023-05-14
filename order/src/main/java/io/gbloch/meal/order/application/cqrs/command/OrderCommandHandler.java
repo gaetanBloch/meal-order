@@ -66,7 +66,7 @@ final class OrderCommandHandler implements CreateOrderUseCase {
         var restaurant = getRestaurant(command);
         var order = orderMapper.toOrder(command);
         var orderCreatedEvent = orderDomainService.createOrder(order, restaurant);
-        // TODO: 13/05/2023 Send event to Kafka
+        // TODO: 14/05/2023 Persist event to Outbox table
         var savedOrder = saveOrder(order);
         return orderMapper.toOrderResponse(savedOrder, "Order created");
     }
@@ -74,9 +74,19 @@ final class OrderCommandHandler implements CreateOrderUseCase {
     private Order saveOrder(Order order) {
         var savedOrder = orderRepository
             .save(order)
-            .orElseThrow(() -> new OrderApplicationException("Could not save order"));
+            .orElseThrow(() ->
+                new OrderApplicationException("Could not save order with id " + order.getId())
+            );
         log.info("Order with id {} created", savedOrder.getId());
         return savedOrder;
+    }
+
+    private void checkIfCustomerExists(UUID uuid) {
+        Optional<Customer> customer = customerRepository.findById(new CustomerId(uuid));
+        if (customer.isEmpty()) {
+            log.warn("Customer with id {} does not exist", uuid);
+            throw new OrderApplicationException("Customer with id " + uuid + " does not exist");
+        }
     }
 
     private Restaurant getRestaurant(CreateOrderCommand command) {
@@ -88,13 +98,5 @@ final class OrderCommandHandler implements CreateOrderUseCase {
                     "Restaurant with id " + restaurant.getId() + " does not exist"
                 )
             );
-    }
-
-    private void checkIfCustomerExists(UUID uuid) {
-        Optional<Customer> customer = customerRepository.findById(new CustomerId(uuid));
-        if (customer.isEmpty()) {
-            log.warn("Customer with id {} does not exist", uuid);
-            throw new OrderApplicationException("Customer with id " + uuid + " does not exist");
-        }
     }
 }

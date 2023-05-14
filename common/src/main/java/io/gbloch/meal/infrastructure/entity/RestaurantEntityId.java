@@ -14,24 +14,33 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.infrastructure.entity;
 
-import io.gbloch.meal.core.annotations.ddd.ValueObject;
-import io.gbloch.meal.core.validation.Validation;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * Address.
+ * RestaurantEntityId.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
-@ValueObject
-public record Address(UUID id, String street, String city, String zipCode, String country) {
-    public Address {
-        Validation.field("street", street).notBlank().maxLength(255);
-        Validation.field("city", city).notBlank().maxLength(255);
-        Validation.field("zipCode", zipCode).notBlank().maxLength(10);
-        Validation.field("country", country).notBlank().maxLength(255);
-    }
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestaurantEntityId implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7816538791575923380L;
+
+    private UUID restaurantId;
+    private UUID productId;
 }

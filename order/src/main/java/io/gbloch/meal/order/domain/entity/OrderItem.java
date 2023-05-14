@@ -36,7 +36,7 @@ public final class OrderItem extends EntityBase<OrderItemId> {
     private final Product product;
     private final Quantity quantity;
     private final Money price;
-    private final Money totalPrice;
+    private final Money subTotal;
 
     OrderItem(
         OrderItemId id,
@@ -44,14 +44,14 @@ public final class OrderItem extends EntityBase<OrderItemId> {
         Product product,
         Quantity quantity,
         Money price,
-        Money totalPrice
+        Money subTotal
     ) {
         super(id);
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
-        this.totalPrice = totalPrice;
+        this.subTotal = subTotal;
     }
 
     @Override
@@ -77,7 +77,7 @@ public final class OrderItem extends EntityBase<OrderItemId> {
         return (
             price.isGreaterThanZero() &&
             price.equals(product.getPrice()) &&
-            totalPrice.equals(price.multiply(quantity.quantity()))
+            subTotal.equals(price.multiply(quantity.quantity()))
         );
     }
 
@@ -117,7 +117,7 @@ public final class OrderItem extends EntityBase<OrderItemId> {
             return this;
         }
 
-        public OrderItemBuilder totalPrice(Money totalPrice) {
+        public OrderItemBuilder subTotal(Money totalPrice) {
             this.totalPrice = totalPrice;
             return this;
         }

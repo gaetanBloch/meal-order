@@ -30,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @ApplicationScoped
 @Slf4j
-public final class PaymentMessageListener implements PaymentCancelledUseCase, PaymentCompletedUseCase {
+public final class PaymentMessageListener
+    implements PaymentCancelledUseCase, PaymentCompletedUseCase {
 
     @Override
     public void paymentCancelled(PaymentResponse response) {}
