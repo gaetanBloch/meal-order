@@ -31,15 +31,17 @@ import org.mapstruct.Mapping;
  */
 @Mapper(componentModel = "cdi")
 public interface CustomerMapper {
-    @Mapping(target = "identity.userName" ,source = "userName")
-    @Mapping(target = "identity.firstName" ,source = "firstName")
-    @Mapping(target = "identity.lastName" ,source = "lastName")
+    @Mapping(target = "identity.userName", source = "userName")
+    @Mapping(target = "identity.firstName", source = "firstName")
+    @Mapping(target = "identity.lastName", source = "lastName")
     Customer toCustomer(CustomerEntity customerEntity);
+
     CustomerId toCustomerId(UUID id);
 
     @Mapping(target = "userName", source = "identity.userName")
     @Mapping(target = "firstName", source = "identity.firstName")
     @Mapping(target = "lastName", source = "identity.lastName")
     CustomerEntity toCustomerEntity(Customer customer);
+
     UUID toUUID(CustomerId customerId);
 }

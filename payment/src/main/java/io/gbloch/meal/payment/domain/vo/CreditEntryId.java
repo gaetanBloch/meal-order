@@ -14,37 +14,22 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.payment.domain.vo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import io.gbloch.meal.core.annotations.ddd.ValueObject;
+import io.gbloch.meal.domain.vo.IdBase;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
- * CustomerEntity.
+ * CreditEntryId.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
-//@Entity
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-//@Table(name = "customers")
-public class CustomerEntity {
+@ValueObject
+public final class CreditEntryId extends IdBase<UUID> {
 
-    @Id
-    private UUID id;
-
-    private String userName;
-    private String firstName;
-    private String lastName;
+    public CreditEntryId(UUID value) {
+        super(value);
+    }
 }

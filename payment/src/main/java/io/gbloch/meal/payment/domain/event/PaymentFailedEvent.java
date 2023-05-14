@@ -14,37 +14,22 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.payment.domain.event;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.gbloch.meal.payment.domain.entity.Payment;
+import java.util.List;
 
 /**
- * CustomerEntity.
+ * PaymentFailedEvent.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
-//@Entity
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-//@Table(name = "customers")
-public class CustomerEntity {
+public class PaymentFailedEvent extends PaymentEvent {
 
-    @Id
-    private UUID id;
+    public static final String PAYMENT_FAILED_EVENT = "OrderCancelledEvent";
 
-    private String userName;
-    private String firstName;
-    private String lastName;
+    public PaymentFailedEvent(Payment payload, List<String> failureMessages) {
+        super(payload, failureMessages, PAYMENT_FAILED_EVENT);
+    }
 }

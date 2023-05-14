@@ -28,20 +28,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * RestaurantEntity.
- *
- * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
- */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(RestaurantEntityId.class)
-@Table(name = "order_restaurants")
+//@IdClass(RestaurantEntityId.class)
+//@Table(name = "order_restaurants")
 public class RestaurantEntity {
 
     @Id

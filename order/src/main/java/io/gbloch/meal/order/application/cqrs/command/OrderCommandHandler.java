@@ -33,7 +33,6 @@ import io.gbloch.meal.order.domain.event.OrderCreatedEvent;
 import io.gbloch.meal.order.domain.service.OrderDomainService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +60,7 @@ final class OrderCommandHandler implements CreateOrderUseCase {
     private final OrderMapper orderMapper;
 
     @Transactional
-    public CreateOrderResponse createOrder(@Valid CreateOrderCommand command) {
+    public CreateOrderResponse createOrder(CreateOrderCommand command) {
         checkIfCustomerExists(command.customerId());
         var restaurant = getRestaurant(command);
         var order = orderMapper.toOrder(command);

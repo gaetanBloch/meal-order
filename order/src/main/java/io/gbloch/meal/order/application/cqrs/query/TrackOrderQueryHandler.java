@@ -44,7 +44,7 @@ final class TrackOrderQueryHandler implements TrackOrderUseCase {
 
     @Override
     @Transactional
-    public TrackOrderResponse trackOrder(@Valid TrackOrderQuery query) {
+    public TrackOrderResponse trackOrder(TrackOrderQuery query) {
         var order = orderRepository
             .findByTrackingId(new TrackingId(query.orderTrackingId()))
             .orElseThrow(() ->

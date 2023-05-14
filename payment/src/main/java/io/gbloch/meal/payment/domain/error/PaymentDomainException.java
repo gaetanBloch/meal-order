@@ -14,37 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.payment.domain.error;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.gbloch.meal.domain.error.DomainException;
+import java.io.Serial;
 
 /**
- * CustomerEntity.
+ * PaymentDomainException.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
-//@Entity
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-//@Table(name = "customers")
-public class CustomerEntity {
+public final class PaymentDomainException extends DomainException {
 
-    @Id
-    private UUID id;
+    @Serial
+    private static final long serialVersionUID = -8115664560237762855L;
 
-    private String userName;
-    private String firstName;
-    private String lastName;
+    public PaymentDomainException(String message) {
+        super(message);
+    }
+
+    public PaymentDomainException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
