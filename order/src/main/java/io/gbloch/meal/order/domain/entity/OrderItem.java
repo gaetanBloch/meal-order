@@ -19,8 +19,8 @@ package io.gbloch.meal.order.domain.entity;
 import io.gbloch.meal.domain.entity.EntityBase;
 import io.gbloch.meal.domain.vo.Money;
 import io.gbloch.meal.domain.vo.OrderId;
+import io.gbloch.meal.domain.vo.Quantity;
 import io.gbloch.meal.order.domain.vo.OrderItemId;
-import io.gbloch.meal.order.domain.vo.Quantity;
 import lombok.Getter;
 
 /**

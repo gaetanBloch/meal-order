@@ -18,7 +18,10 @@ package io.gbloch.meal.payment.application.mapper;
 
 import io.gbloch.meal.payment.application.dto.PaymentRequest;
 import io.gbloch.meal.payment.domain.entity.Payment;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * OrderMapper.
@@ -28,5 +31,15 @@ import org.mapstruct.Mapper;
  */
 @Mapper(componentModel = "cdi")
 public interface PaymentMapper {
+    @Mapping(target = "id.value", source = "id")
+    @Mapping(target = "customerId.value", source = "customerId")
+    @Mapping(target = "orderId.value", source = "orderId")
+    @Mapping(target = "price.amount", source = "price")
     Payment toPayment(PaymentRequest request);
+
+    default ZonedDateTime map(Instant instant) {
+        return instant == null
+            ? null
+            : ZonedDateTime.ofInstant(instant, ZonedDateTime.now().getZone());
+    }
 }

@@ -14,65 +14,71 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.domain.entity;
+package io.gbloch.meal.restaurant.domain.entity;
 
 import io.gbloch.meal.domain.entity.EntityBase;
+import io.gbloch.meal.domain.vo.AvailabilityType;
 import io.gbloch.meal.domain.vo.Money;
 import io.gbloch.meal.domain.vo.ProductId;
 import io.gbloch.meal.domain.vo.ProductLabel;
+import io.gbloch.meal.domain.vo.Quantity;
 import lombok.Getter;
 
 /**
  * Product.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
 @Getter
 public final class Product extends EntityBase<ProductId> {
 
+    private final Quantity quantity;
     private ProductLabel label;
     private Money price;
+    private AvailabilityType availability;
 
-    private Product(ProductId productId, ProductLabel label, Money price) {
-        super(productId);
+    private Product(
+        ProductId id,
+        Quantity quantity,
+        ProductLabel label,
+        Money price,
+        AvailabilityType availability
+    ) {
+        super(id);
+        this.quantity = quantity;
         this.label = label;
         this.price = price;
+        this.availability = availability;
     }
 
-    public Product(ProductId productId) {
-        super(productId);
-    }
-
-    public void updateProductInfo(ProductLabel label, Money price) {
-        this.label = label;
+    public void updateNameAndAvailability(String name, Money price, AvailabilityType available) {
+        this.label = new ProductLabel(name);
         this.price = price;
+        this.availability = availability;
     }
 
     public static ProductBuilder builder() {
         return new ProductBuilder();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
     public static class ProductBuilder {
 
-        private ProductId productId;
+        private ProductId id;
+        private Quantity quantity;
         private ProductLabel label;
         private Money price;
+        private AvailabilityType availability;
 
         ProductBuilder() {}
 
-        public ProductBuilder productId(ProductId productId) {
-            this.productId = productId;
+        public ProductBuilder id(ProductId id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder quantity(Quantity quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -86,12 +92,13 @@ public final class Product extends EntityBase<ProductId> {
             return this;
         }
 
-        public Product build() {
-            return new Product(this.productId, this.label, this.price);
+        public ProductBuilder availability(AvailabilityType availability) {
+            this.availability = availability;
+            return this;
         }
 
-        public String toString() {
-            return "Product.ProductBuilder(label=" + this.label + ", price=" + this.price + ")";
+        public Product build() {
+            return new Product(this.id, this.quantity, this.label, this.price, this.availability);
         }
     }
 }

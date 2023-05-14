@@ -14,31 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.domain.event;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import io.gbloch.meal.domain.event.DomainEvent;
+import io.gbloch.meal.domain.event.EventHeader;
+import io.gbloch.meal.restaurant.domain.entity.OrderApproval;
+import java.util.List;
 
 /**
- * BaseId.
+ * OrderApprovalEvent.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+public abstract class OrderApprovalEvent extends DomainEvent<OrderApproval> {
 
-    public static final String ID_FIELD = "id";
+    private final List<String> failureMessages;
 
-    @EqualsAndHashCode.Include
-    protected T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
+    protected OrderApprovalEvent(OrderApproval payload, List<String> failureMessages, String name) {
+        this.setName(name);
+        this.setPayload(payload);
+        this.failureMessages = failureMessages;
+        this.setHeader(EventHeader.of());
     }
 }

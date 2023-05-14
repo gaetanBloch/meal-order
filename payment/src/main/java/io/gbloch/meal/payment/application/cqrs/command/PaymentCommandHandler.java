@@ -58,8 +58,9 @@ final class PaymentCommandHandler implements CompletePaymentUseCase, CancelPayme
     private final PaymentRepository paymentRepository;
     private final CreditEntryRepository creditEntryRepository;
     private final CreditHistoryRepository creditHistoryRepository;
-    private final CompletePaymentMessagePublisher completePaymentMessagePublisher;
-    private final CancelPaymentMessagePublisher cancelPaymentMessagePublisher;
+
+    //    private final CompletePaymentMessagePublisher completePaymentMessagePublisher;
+    //    private final CancelPaymentMessagePublisher cancelPaymentMessagePublisher;
 
     @Override
     @Transactional
@@ -91,9 +92,7 @@ final class PaymentCommandHandler implements CompletePaymentUseCase, CancelPayme
     }
 
     private List<CreditHistory> getCreditHistory(CustomerId customerId) {
-        List<CreditHistory> creditHistories = creditHistoryRepository.findByCustomerId(
-            customerId
-        );
+        List<CreditHistory> creditHistories = creditHistoryRepository.findByCustomerId(customerId);
         if (creditHistories.isEmpty()) {
             log.error("Could not find credit history for customer: {}", customerId.getValue());
             throw new PaymentApplicationException(

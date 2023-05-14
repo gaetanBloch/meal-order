@@ -14,31 +14,42 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.infrastucture.entity;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
+import io.gbloch.meal.domain.vo.OrderApprovalStatus;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * BaseId.
+ * PaymentEntity.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "order_approval")
+@Entity
+public class OrderApprovalEntity {
 
-    public static final String ID_FIELD = "id";
+    @Id
+    private UUID id;
 
-    @EqualsAndHashCode.Include
-    protected T value;
+    private UUID restaurantId;
+    private UUID orderId;
 
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
+    @Enumerated(EnumType.STRING)
+    private OrderApprovalStatus status;
 }

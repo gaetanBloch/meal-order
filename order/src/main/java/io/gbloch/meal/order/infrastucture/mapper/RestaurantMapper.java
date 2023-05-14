@@ -18,8 +18,8 @@ package io.gbloch.meal.order.infrastucture.mapper;
 
 import io.gbloch.meal.domain.vo.ActiveType;
 import io.gbloch.meal.domain.vo.Money;
+import io.gbloch.meal.domain.vo.ProductLabel;
 import io.gbloch.meal.order.domain.entity.Restaurant;
-import io.gbloch.meal.order.domain.vo.ProductLabel;
 import io.gbloch.meal.order.infrastucture.entity.OrderRestaurantEntity;
 import java.math.BigDecimal;
 import org.mapstruct.Mapper;

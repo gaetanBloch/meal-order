@@ -41,8 +41,10 @@ import lombok.Setter;
 @Table(name = "credit_entry")
 @Entity
 public class CreditEntryEntity {
+
     @Id
     private UUID id;
+
     private UUID customerId;
     private BigDecimal totalCreditAmount;
 }

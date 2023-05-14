@@ -14,12 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.domain.vo;
+package io.gbloch.meal.restaurant.domain.error;
+
+import io.gbloch.meal.domain.error.DomainException;
+import java.io.Serial;
 
 /**
- * Quantity.
+ * RestaurantDomainException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public record Quantity(int quantity) {}
+public final class RestaurantDomainException extends DomainException {
+
+    @Serial
+    private static final long serialVersionUID = 8827048115900221212L;
+
+    public RestaurantDomainException(String message) {
+        super(message);
+    }
+
+    public RestaurantDomainException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}

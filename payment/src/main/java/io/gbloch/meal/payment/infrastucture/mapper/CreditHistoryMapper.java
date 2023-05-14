@@ -19,6 +19,7 @@ package io.gbloch.meal.payment.infrastucture.mapper;
 import io.gbloch.meal.payment.domain.entity.CreditHistory;
 import io.gbloch.meal.payment.infrastucture.entity.CreditHistoryEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * CreditHistoryMapper.
@@ -28,7 +29,13 @@ import org.mapstruct.Mapper;
  */
 @Mapper(componentModel = "cdi")
 public interface CreditHistoryMapper {
+    @Mapping(target = "id.value", source = "id")
+    @Mapping(target = "customerId.value", source = "customerId")
+    @Mapping(target = "amount.amount", source = "amount")
     CreditHistory toCreditHistory(CreditHistoryEntity entity);
 
+    @Mapping(target = "id", source = "id.value")
+    @Mapping(target = "customerId", source = "customerId.value")
+    @Mapping(target = "amount", source = "amount.amount")
     CreditHistoryEntity toCreditHistoryEntity(CreditHistory creditHistory);
 }

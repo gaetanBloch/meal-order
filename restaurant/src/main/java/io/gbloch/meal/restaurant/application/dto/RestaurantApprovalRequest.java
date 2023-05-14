@@ -14,31 +14,36 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.application.dto;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
+import io.gbloch.meal.domain.vo.RestaurantOrderStatus;
+import io.gbloch.meal.restaurant.domain.entity.Product;
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * BaseId.
+ * RestaurantApprovalRequest.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
 @Getter
+@Builder
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+@AllArgsConstructor
+public final class RestaurantApprovalRequest {
 
-    public static final String ID_FIELD = "id";
-
-    @EqualsAndHashCode.Include
-    protected T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
+    private UUID id;
+    private UUID restaurantId;
+    private UUID orderId;
+    private RestaurantOrderStatus restaurantOrderStatus;
+    private List<Product> products;
+    private BigDecimal price;
+    private Instant createdAt;
 }

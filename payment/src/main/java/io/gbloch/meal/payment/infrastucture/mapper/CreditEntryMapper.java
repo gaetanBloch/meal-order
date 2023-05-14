@@ -19,6 +19,7 @@ package io.gbloch.meal.payment.infrastucture.mapper;
 import io.gbloch.meal.payment.domain.entity.CreditEntry;
 import io.gbloch.meal.payment.infrastucture.entity.CreditEntryEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * CreditEntryMapper.
@@ -28,7 +29,13 @@ import org.mapstruct.Mapper;
  */
 @Mapper(componentModel = "cdi")
 public interface CreditEntryMapper {
+    @Mapping(target = "id.value", source = "id")
+    @Mapping(target = "customerId.value", source = "customerId")
+    @Mapping(target = "totalCreditAmount.amount", source = "totalCreditAmount")
     CreditEntry toCreditEntry(CreditEntryEntity entity);
 
+    @Mapping(target = "id", source = "id.value")
+    @Mapping(target = "customerId", source = "customerId.value")
+    @Mapping(target = "totalCreditAmount", source = "totalCreditAmount.amount")
     CreditEntryEntity toCreditEntryEntity(CreditEntry creditEntry);
 }

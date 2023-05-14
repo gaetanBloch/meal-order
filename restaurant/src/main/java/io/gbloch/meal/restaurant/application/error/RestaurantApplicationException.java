@@ -14,31 +14,23 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.application.error;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import io.gbloch.meal.application.error.ApplicationException;
 
 /**
- * BaseId.
+ * RestaurantApplicationException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+public final class RestaurantApplicationException extends ApplicationException {
 
-    public static final String ID_FIELD = "id";
+    public RestaurantApplicationException(String message) {
+        super(message);
+    }
 
-    @EqualsAndHashCode.Include
-    protected T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
+    public RestaurantApplicationException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

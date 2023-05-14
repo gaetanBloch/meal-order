@@ -56,6 +56,8 @@ public final class CreditHistoryRepositoryImpl
     @Override
     public List<CreditHistory> findByCustomerId(CustomerId customerId) {
         return find("customerId", customerId)
-            .stream().map(creditHistoryMapper::toCreditHistory).toList();
+            .stream()
+            .map(creditHistoryMapper::toCreditHistory)
+            .toList();
     }
 }

@@ -14,30 +14,33 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.payment.infrastucture.mapper;
+package io.gbloch.meal.restaurant.infrastucture.mapper;
 
-import io.gbloch.meal.payment.domain.entity.Payment;
-import io.gbloch.meal.payment.infrastucture.entity.PaymentEntity;
+import io.gbloch.meal.restaurant.domain.entity.OrderApproval;
+import io.gbloch.meal.restaurant.domain.entity.Restaurant;
+import io.gbloch.meal.restaurant.infrastucture.entity.OrderApprovalEntity;
+import io.gbloch.meal.restaurant.infrastucture.entity.RestaurantEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 /**
- * CustomerMapper.
+ * CreditEntryMapper.
  *
  * @author Gaëtan Bloch
  * <br>Created on 14/05/2023
  */
 @Mapper(componentModel = "cdi")
-public interface PaymentMapper {
-    @Mapping(target = "id.value", source = "id")
-    @Mapping(target = "customerId.value", source = "customerId")
-    @Mapping(target = "orderId.value", source = "orderId")
-    @Mapping(target = "price.amount", source = "price")
-    Payment toPayment(PaymentEntity entity);
+public interface RestaurantMapper {
+    Restaurant toRestaurant(RestaurantEntity restaurantEntity);
+
 
     @Mapping(target = "id", source = "id.value")
-    @Mapping(target = "customerId", source = "customerId.value")
+    @Mapping(target = "restaurantId", source = "restaurantId.value")
     @Mapping(target = "orderId", source = "orderId.value")
-    @Mapping(target = "price", source = "price.amount")
-    PaymentEntity toPaymentEntity(Payment payment);
+    OrderApprovalEntity toOrderApprovalEntity(OrderApproval orderApproval);
+
+    @Mapping(target = "id.value", source = "id")
+    @Mapping(target = "restaurantId.value", source = "restaurantId")
+    @Mapping(target = "orderId.value", source = "orderId")
+    OrderApproval toOrderApproval(OrderApprovalEntity orderApprovalEntity);
 }

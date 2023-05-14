@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.domain.vo;
+package io.gbloch.meal.domain.vo;
 
 /**
  * ProductLabel.

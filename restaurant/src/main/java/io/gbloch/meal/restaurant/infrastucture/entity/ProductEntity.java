@@ -14,31 +14,43 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.infrastucture.entity;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * BaseId.
+ * OrderProductEntity.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
+@Entity
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "products")
+public class ProductEntity {
 
-    public static final String ID_FIELD = "id";
+    @Id
+    private UUID id;
 
-    @EqualsAndHashCode.Include
-    protected T value;
+    private String label;
+    private BigDecimal price;
 
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
+    @ManyToMany(mappedBy = "products")
+    private Set<RestaurantEntity> restaurantEntitySet = new HashSet<>();
 }

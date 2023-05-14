@@ -35,7 +35,8 @@ import lombok.RequiredArgsConstructor;
  */
 @ApplicationScoped
 @RequiredArgsConstructor
-public final class CreditEntryRepositoryImpl implements CreditEntryRepository, PanacheRepository<CreditEntryEntity> {
+public final class CreditEntryRepositoryImpl
+    implements CreditEntryRepository, PanacheRepository<CreditEntryEntity> {
 
     private final CreditEntryMapper creditEntryMapper;
 

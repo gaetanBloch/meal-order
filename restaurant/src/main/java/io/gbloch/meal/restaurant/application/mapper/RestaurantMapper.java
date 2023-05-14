@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.application.mapper;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import io.gbloch.meal.restaurant.application.dto.RestaurantApprovalRequest;
+import io.gbloch.meal.restaurant.domain.entity.Restaurant;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
- * BaseId.
+ * OrderMapper.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
-
-    public static final String ID_FIELD = "id";
-
-    @EqualsAndHashCode.Include
-    protected T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
+@Mapper(componentModel = "cdi")
+public interface RestaurantMapper {
+    @Mapping(target = "id", ignore = true)
+    Restaurant toRestaurant(RestaurantApprovalRequest request);
 }

@@ -14,31 +14,16 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.vo;
+package io.gbloch.meal.restaurant.application.port.input;
 
-import io.gbloch.meal.core.validation.Validation;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import io.gbloch.meal.restaurant.application.dto.RestaurantApprovalRequest;
 
 /**
- * BaseId.
+ * ApproveOrderUseCase.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 14/05/2023
  */
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class IdBase<T> {
-
-    public static final String ID_FIELD = "id";
-
-    @EqualsAndHashCode.Include
-    protected T value;
-
-    protected IdBase(T value) {
-        Validation.notNull(ID_FIELD, value);
-        this.value = value;
-    }
+public interface ApproveOrderUseCase {
+    void approveOrder(RestaurantApprovalRequest restaurantApprovalRequest);
 }

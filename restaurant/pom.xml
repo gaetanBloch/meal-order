@@ -17,7 +17,12 @@
 
   <properties />
 
-  <modules />
+  <dependencies>
+    <dependency>
+      <groupId>io.gbloch.meal</groupId>
+      <artifactId>common</artifactId>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
