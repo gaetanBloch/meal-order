@@ -102,8 +102,8 @@ public final class PaymentDomainService {
             );
             failureMessages.add(
                 "Customer with id=" +
-                    payment.getCustomerId().getValue() +
-                    " doesn't have enough credit for payment!"
+                payment.getCustomerId().getValue() +
+                " doesn't have enough credit for payment!"
             );
         }
     }
@@ -143,8 +143,8 @@ public final class PaymentDomainService {
             );
             failureMessages.add(
                 "Customer with id=" +
-                    creditEntry.getCustomerId().getValue() +
-                    " doesn't have enough credit according to credit history!"
+                creditEntry.getCustomerId().getValue() +
+                " doesn't have enough credit according to credit history!"
             );
         }
 
@@ -159,8 +159,8 @@ public final class PaymentDomainService {
             );
             failureMessages.add(
                 "Credit history total is not equal to current credit for customer id: " +
-                    creditEntry.getCustomerId().getValue() +
-                    "!"
+                creditEntry.getCustomerId().getValue() +
+                "!"
             );
         }
     }
