@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.infrastucture.adapter.secondary;
+package io.gbloch.meal.customer.infrastucture.adapter.secondary;
 
+import io.gbloch.meal.customer.application.port.output.repository.CustomerRepository;
+import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.customer.infrastucture.entity.CustomerEntity;
+import io.gbloch.meal.customer.infrastucture.mapper.CustomerMapper;
 import io.gbloch.meal.domain.vo.CustomerId;
-import io.gbloch.meal.order.application.port.output.repository.CustomerRepository;
-import io.gbloch.meal.order.domain.entity.Customer;
-import io.gbloch.meal.order.infrastucture.entity.OrderCustomerEntity;
-import io.gbloch.meal.order.infrastucture.mapper.CustomerMapper;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * CustomerRepositoryImpl.
@@ -34,20 +35,24 @@ import lombok.RequiredArgsConstructor;
  */
 @ApplicationScoped
 @RequiredArgsConstructor
+@Slf4j
 public final class CustomerRepositoryImpl
-    implements CustomerRepository, PanacheRepository<OrderCustomerEntity> {
+    implements CustomerRepository, PanacheRepository<CustomerEntity> {
 
-    private final CustomerMapper customerMapper;
+    private final CustomerMapper mapper;
 
     @Override
-    public Optional<Customer> save(Customer customer) {
-        var customerEntity = this.customerMapper.toCustomerEntity(customer);
-        this.persist(customerEntity);
-        return Optional.of(this.customerMapper.toCustomer(customerEntity));
+    public Optional<Customer> save(Customer entity) {
+        var customerEntity = mapper.toCustomerEntity(entity);
+        log.info("Saving customer: {}", customerEntity);
+        persist(customerEntity);
+        Customer customer = mapper.toCustomer(customerEntity);
+        log.info("Saved customer: {}", customer);
+        return Optional.of(customer);
     }
 
     @Override
     public Optional<Customer> findById(CustomerId id) {
-        return this.find("id", id.getValue()).firstResultOptional().map(customerMapper::toCustomer);
+        return find("id", id.getValue()).firstResultOptional().map(mapper::toCustomer);
     }
 }

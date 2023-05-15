@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.domain.error;
 
-import io.gbloch.meal.application.error.ApplicationException;
+import io.gbloch.meal.domain.error.DomainException;
 import java.io.Serial;
 
 /**
- * OrderApplicationException.
+ * CustomerDomainException.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
+public final class CustomerDomainException extends DomainException {
 
     @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
+    private static final long serialVersionUID = 5357355200625483846L;
 
-    public OrderApplicationException(String message) {
+    public CustomerDomainException(String message) {
         super(message);
     }
 
-    public OrderApplicationException(String message, Throwable cause) {
+    public CustomerDomainException(String message, Throwable cause) {
         super(message, cause);
     }
 }

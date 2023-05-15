@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.domain.service;
 
-import io.gbloch.meal.application.error.ApplicationException;
-import java.io.Serial;
+import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.customer.domain.event.CustomerCreatedEvent;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * OrderApplicationException.
+ * OrderDomainService.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
+@Slf4j
+@ApplicationScoped
+public final class CustomerDomainService {
 
-    @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
-
-    public OrderApplicationException(String message) {
-        super(message);
-    }
-
-    public OrderApplicationException(String message, Throwable cause) {
-        super(message, cause);
+    public CustomerCreatedEvent createCustomer(Customer customer) {
+        log.info("Customer with id: {} is initiated", customer.getId().getValue());
+        return new CustomerCreatedEvent(customer);
     }
 }

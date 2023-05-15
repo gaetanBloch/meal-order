@@ -14,33 +14,21 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.customer.application.dto;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
- * RestaurantEntityId.
+ * CreateCustomerResponse.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
-@Getter
-@Setter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class RestaurantEntityId implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -7816538791575923380L;
-
-    private UUID restaurantId;
-    private UUID productId;
-}
+public record GetCustomerResponse(
+    UUID customerId,
+    String userName,
+    String firstName,
+    String lastName
+) {}

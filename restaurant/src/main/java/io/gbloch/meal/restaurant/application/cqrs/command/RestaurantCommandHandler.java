@@ -97,9 +97,7 @@ final class RestaurantCommandHandler implements ApproveOrderUseCase {
                         }
                     })
             );
-        restaurant
-            .getOrderDetail()
-            .setId(new OrderId(restaurantApprovalRequest.getOrderId()));
+        restaurant.getOrderDetail().setId(new OrderId(restaurantApprovalRequest.getOrderId()));
 
         return restaurant;
     }

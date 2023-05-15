@@ -14,36 +14,39 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.customer.infrastucture.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-//@Entity
+/**
+ * CustomerEntity.
+ *
+ * @author Gaëtan Bloch
+ * <br>Created on 14/05/2023
+ */
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-//@IdClass(RestaurantEntityId.class)
-//@Table(name = "order_restaurants")
-public class RestaurantEntity {
+@ToString
+@Table(name = "customers")
+public class CustomerEntity {
 
     @Id
-    private UUID restaurantId;
+    private UUID id;
 
-    private String restaurantName;
-    private Boolean active;
-    private String productName;
-    private BigDecimal productPrice;
-    private Boolean productAvailable;
+    private String userName;
+    private String firstName;
+    private String lastName;
 }

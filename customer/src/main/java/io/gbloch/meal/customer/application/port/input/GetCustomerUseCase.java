@@ -14,27 +14,17 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.application.port.input;
 
-import io.gbloch.meal.application.error.ApplicationException;
-import java.io.Serial;
+import io.gbloch.meal.customer.application.dto.GetCustomerResponse;
+import java.util.UUID;
 
 /**
- * OrderApplicationException.
+ * GetCustomerUseCase.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
-
-    @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
-
-    public OrderApplicationException(String message) {
-        super(message);
-    }
-
-    public OrderApplicationException(String message, Throwable cause) {
-        super(message, cause);
-    }
+public interface GetCustomerUseCase {
+    GetCustomerResponse getCustomer(UUID customerId);
 }

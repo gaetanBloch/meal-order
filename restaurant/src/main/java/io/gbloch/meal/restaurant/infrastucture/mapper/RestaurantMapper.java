@@ -33,7 +33,6 @@ import org.mapstruct.Mapping;
 public interface RestaurantMapper {
     Restaurant toRestaurant(RestaurantEntity restaurantEntity);
 
-
     @Mapping(target = "id", source = "id.value")
     @Mapping(target = "restaurantId", source = "restaurantId.value")
     @Mapping(target = "orderId", source = "orderId.value")

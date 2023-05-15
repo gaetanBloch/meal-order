@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.infrastucture.mapper;
+package io.gbloch.meal.customer.application.mapper;
 
-import io.gbloch.meal.domain.vo.CustomerId;
-import io.gbloch.meal.order.domain.entity.Customer;
-import io.gbloch.meal.order.infrastucture.entity.OrderCustomerEntity;
-import java.util.UUID;
+import io.gbloch.meal.customer.application.dto.CreateCustomerCommand;
+import io.gbloch.meal.customer.application.dto.CreateCustomerResponse;
+import io.gbloch.meal.customer.application.dto.GetCustomerResponse;
+import io.gbloch.meal.customer.domain.entity.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -27,21 +27,23 @@ import org.mapstruct.Mapping;
  * CustomerMapper.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
 @Mapper(componentModel = "cdi")
 public interface CustomerMapper {
+
     @Mapping(target = "identity.userName", source = "userName")
     @Mapping(target = "identity.firstName", source = "firstName")
     @Mapping(target = "identity.lastName", source = "lastName")
-    Customer toCustomer(OrderCustomerEntity customerEntity);
+    Customer toCustomer(CreateCustomerCommand command);
 
-    CustomerId toCustomerId(UUID id);
-
+    @Mapping(target = "customerId", source = "id.value")
     @Mapping(target = "userName", source = "identity.userName")
     @Mapping(target = "firstName", source = "identity.firstName")
     @Mapping(target = "lastName", source = "identity.lastName")
-    OrderCustomerEntity toCustomerEntity(Customer customer);
+    GetCustomerResponse toGetCustomerResponse(Customer customer);
 
-    UUID toUUID(CustomerId customerId);
+    default CreateCustomerResponse toCreateCustomerResponse(Customer customer, String message) {
+        return new CreateCustomerResponse(customer.getId().getValue(), message);
+    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.application.error;
 
 import io.gbloch.meal.application.error.ApplicationException;
 import java.io.Serial;
@@ -25,16 +25,16 @@ import java.io.Serial;
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
+public final class CustomerApplicationException extends ApplicationException {
 
     @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
+    private static final long serialVersionUID = 6549358814068448273L;
 
-    public OrderApplicationException(String message) {
+    public CustomerApplicationException(String message) {
         super(message);
     }
 
-    public OrderApplicationException(String message, Throwable cause) {
+    public CustomerApplicationException(String message, Throwable cause) {
         super(message, cause);
     }
 }

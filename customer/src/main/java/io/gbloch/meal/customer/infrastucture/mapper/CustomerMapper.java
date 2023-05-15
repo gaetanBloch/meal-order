@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.infrastucture.mapper;
+package io.gbloch.meal.customer.infrastucture.mapper;
 
+import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.customer.infrastucture.entity.CustomerEntity;
 import io.gbloch.meal.domain.vo.CustomerId;
-import io.gbloch.meal.order.domain.entity.Customer;
-import io.gbloch.meal.order.infrastucture.entity.OrderCustomerEntity;
 import java.util.UUID;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -34,14 +34,12 @@ public interface CustomerMapper {
     @Mapping(target = "identity.userName", source = "userName")
     @Mapping(target = "identity.firstName", source = "firstName")
     @Mapping(target = "identity.lastName", source = "lastName")
-    Customer toCustomer(OrderCustomerEntity customerEntity);
-
-    CustomerId toCustomerId(UUID id);
+    @Mapping(target = "customerId.value", source = "id")
+    Customer toCustomer(CustomerEntity customerEntity);
 
     @Mapping(target = "userName", source = "identity.userName")
     @Mapping(target = "firstName", source = "identity.firstName")
     @Mapping(target = "lastName", source = "identity.lastName")
-    OrderCustomerEntity toCustomerEntity(Customer customer);
-
-    UUID toUUID(CustomerId customerId);
+    @Mapping(target = "id", source = "id.value")
+    CustomerEntity toCustomerEntity(Customer customer);
 }

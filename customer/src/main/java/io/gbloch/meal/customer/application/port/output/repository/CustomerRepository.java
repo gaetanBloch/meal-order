@@ -14,37 +14,16 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.infrastructure.entity;
+package io.gbloch.meal.customer.application.port.output.repository;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.gbloch.meal.application.port.output.repository.Repository;
+import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.domain.vo.CustomerId;
 
 /**
- * CustomerEntity.
+ * CustomerRepository.
  *
  * @author Gaëtan Bloch
- * <br>Created on 14/05/2023
+ * <br>Created on 13/05/2023
  */
-//@Entity
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-//@Table(name = "customers")
-public class CustomerEntity {
-
-    @Id
-    private UUID id;
-
-    private String userName;
-    private String firstName;
-    private String lastName;
-}
+public interface CustomerRepository extends Repository<CustomerId, Customer> {}

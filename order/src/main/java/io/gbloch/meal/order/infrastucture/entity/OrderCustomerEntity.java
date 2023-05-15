@@ -44,7 +44,7 @@ public class OrderCustomerEntity {
     @Id
     private UUID id;
 
-    private String username;
+    private String userName;
     private String firstName;
     private String lastName;
 }

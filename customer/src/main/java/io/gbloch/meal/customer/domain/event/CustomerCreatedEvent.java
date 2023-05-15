@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.domain.event;
 
-import io.gbloch.meal.application.error.ApplicationException;
-import java.io.Serial;
+import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.domain.event.DomainEvent;
+import io.gbloch.meal.domain.event.EventHeader;
 
 /**
- * OrderApplicationException.
+ * CustomerCreatedEvent.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
+public final class CustomerCreatedEvent extends DomainEvent<Customer> {
 
-    @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
+    public static final String CUSTOMER_CREATED_EVENT = "CustomerCreatedEvent";
 
-    public OrderApplicationException(String message) {
-        super(message);
-    }
-
-    public OrderApplicationException(String message, Throwable cause) {
-        super(message, cause);
+    public CustomerCreatedEvent(Customer payload) {
+        this.setName(CUSTOMER_CREATED_EVENT);
+        this.setPayload(payload);
+        this.setHeader(EventHeader.of());
     }
 }

@@ -14,27 +14,17 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.order.application.error;
+package io.gbloch.meal.customer.application.dto;
 
-import io.gbloch.meal.application.error.ApplicationException;
-import java.io.Serial;
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+import lombok.Builder;
 
 /**
- * OrderApplicationException.
+ * CreateCustomerResponse.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class OrderApplicationException extends ApplicationException {
-
-    @Serial
-    private static final long serialVersionUID = 8614524790439747716L;
-
-    public OrderApplicationException(String message) {
-        super(message);
-    }
-
-    public OrderApplicationException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}
+@Builder
+public record CreateCustomerResponse(@NotNull UUID customerId, @NotNull String message) {}
