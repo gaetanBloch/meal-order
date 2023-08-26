@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.event;
+package io.gbloch.meal.order.domain.vo;
 
-import io.gbloch.meal.domain.vo.IdBase;
+import io.gbloch.meal.core.annotations.ddd.ValueObject;
+import io.gbloch.meal.core.validation.Validation;
 import java.util.UUID;
 
 /**
- * DomainEventPublisher.
+ * Address.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public interface DomainEventPublisher<ID extends IdBase<UUID>, T, E extends DomainEvent<ID, T>> {
-    void publish(E event);
+@ValueObject
+public record Address(UUID id, String street, String city, String zipCode, String country) {
+    public Address {
+        Validation.field("street", street).notBlank().maxLength(255);
+        Validation.field("city", city).notBlank().maxLength(255);
+        Validation.field("zipCode", zipCode).notBlank().maxLength(10);
+        Validation.field("country", country).notBlank().maxLength(255);
+    }
 }

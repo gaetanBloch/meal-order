@@ -19,6 +19,7 @@ package io.gbloch.meal.customer.application.port.output.message.publisher;
 import io.gbloch.meal.customer.domain.entity.Customer;
 import io.gbloch.meal.customer.domain.event.CustomerCreatedEvent;
 import io.gbloch.meal.domain.event.DomainEventPublisher;
+import io.gbloch.meal.domain.vo.CustomerId;
 
 /**
  * CustomerMessagePublisher.
@@ -27,4 +28,4 @@ import io.gbloch.meal.domain.event.DomainEventPublisher;
  * <br>Created on 13/05/2023
  */
 public interface CustomerMessagePublisher
-    extends DomainEventPublisher<Customer, CustomerCreatedEvent> {}
+    extends DomainEventPublisher<CustomerId, Customer, CustomerCreatedEvent> {}

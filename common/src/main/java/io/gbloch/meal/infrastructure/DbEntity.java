@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.event;
+package io.gbloch.meal.infrastructure;
 
-import io.gbloch.meal.domain.vo.IdBase;
-import java.util.UUID;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
- * DomainEventPublisher.
+ * DbEntity.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 15/05/2023
  */
-public interface DomainEventPublisher<ID extends IdBase<UUID>, T, E extends DomainEvent<ID, T>> {
-    void publish(E event);
+@Entity
+public class DbEntity {
+    @Id
+    private Long id;
 }

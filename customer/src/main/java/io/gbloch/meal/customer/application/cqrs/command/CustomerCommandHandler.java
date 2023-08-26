@@ -25,7 +25,6 @@ import io.gbloch.meal.customer.domain.entity.Customer;
 import io.gbloch.meal.customer.domain.error.CustomerDomainException;
 import io.gbloch.meal.customer.domain.event.CustomerCreatedEvent;
 import io.gbloch.meal.customer.domain.service.CustomerDomainService;
-import io.gbloch.meal.customer.infrastucture.entity.CustomerEntity;
 import io.gbloch.meal.domain.vo.CustomerId;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
@@ -56,8 +55,6 @@ final class CustomerCommandHandler implements CreateCustomerUseCase {
         log.info("Received CreateCustomerCommand: {}", createCustomerCommand);
         Customer customer = customerMapper.toCustomer(createCustomerCommand);
         customer.setId(new CustomerId(UUID.randomUUID()));
-        CustomerCreatedEvent customerCreatedEvent = customerDomainService.createCustomer(customer);
-        log.info("Creating customer : {}", customer);
         Customer savedCustomer = customerRepository
             .save(customer)
             .orElseThrow(() ->
@@ -65,11 +62,8 @@ final class CustomerCommandHandler implements CreateCustomerUseCase {
                     "Could not save customer with id " + customer.getId()
                 )
             );
-        // TODO: 13/05/2023 Persist event to Outbox table
-        log.info(
-            "Returning CustomerCreatedEvent for customer id: {}",
-            customer.getId()
-        );
+        // Persist the event to Outbox table
+        customerDomainService.createCustomer(savedCustomer);
         return customerMapper.toCreateCustomerResponse(
             savedCustomer,
             "Customer created successfully"

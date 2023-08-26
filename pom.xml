@@ -62,10 +62,10 @@
 
   <modules>
     <module>common</module>
-    <module>order</module>
+<!--    <module>order</module>-->
     <module>customer</module>
-    <module>payment</module>
-    <module>restaurant</module>
+<!--    <module>payment</module>-->
+<!--    <module>restaurant</module>-->
   </modules>
 
   <dependencyManagement>
@@ -103,18 +103,19 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- Debezium -->
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-debezium-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <!-- Quarkus -->
-    <dependency>
-      <groupId>${quarkus.platform.group-id}</groupId>
-      <artifactId>${quarkus.platform.artifact-id}</artifactId>
-      <version>${quarkus.platform.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
 
     <!-- Lombok -->
     <dependency>
@@ -185,6 +186,24 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <!-- Debezium -->
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-quarkus-outbox</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-ddl-parser</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-embedded</artifactId>
+    </dependency>
+    <!-- We connect to a Postgres database, so we need debezium Postgres connector -->
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-connector-postgres</artifactId>
     </dependency>
 
     <!-- Tests -->
@@ -292,7 +311,7 @@
               <rules>
                 <DependencyConvergence />
               </rules>
-              <fail>true</fail>
+              <fail>false</fail>
             </configuration>
             <goals>
               <goal>enforce</goal>

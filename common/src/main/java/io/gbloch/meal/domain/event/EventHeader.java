@@ -16,6 +16,7 @@
 
 package io.gbloch.meal.domain.event;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 import lombok.Builder;
@@ -38,7 +39,7 @@ public final class EventHeader {
     private final UUID causationId;
     private final int version;
     private final EventSourceType source;
-    private final ZonedDateTime timestamp;
+    private final Instant timestamp;
 
     public static EventHeader of(UUID correlationId, UUID causationId) {
         return EventHeader
@@ -48,7 +49,7 @@ public final class EventHeader {
             .causationId(causationId)
             .source(EventSourceType.ORDER)
             .version(1)
-            .timestamp(ZonedDateTime.now())
+            .timestamp(Instant.now())
             .build();
     }
 
@@ -60,7 +61,7 @@ public final class EventHeader {
             .causationId(correlationId)
             .source(EventSourceType.ORDER)
             .version(1)
-            .timestamp(ZonedDateTime.now())
+            .timestamp(Instant.now())
             .build();
     }
 
@@ -72,7 +73,7 @@ public final class EventHeader {
             .causationId(UUID.randomUUID())
             .source(EventSourceType.ORDER)
             .version(1)
-            .timestamp(ZonedDateTime.now())
+            .timestamp(Instant.now())
             .build();
     }
 
@@ -84,11 +85,11 @@ public final class EventHeader {
             .causationId(causationId)
             .source(EventSourceType.ORDER)
             .version(1)
-            .timestamp(ZonedDateTime.now())
+            .timestamp(Instant.now())
             .build();
     }
 
-    public static EventHeader of(ZonedDateTime timestamp) {
+    public static EventHeader of(Instant timestamp) {
         return EventHeader
             .builder()
             .eventId(UUID.randomUUID())

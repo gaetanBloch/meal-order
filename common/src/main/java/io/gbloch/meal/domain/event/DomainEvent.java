@@ -16,8 +16,14 @@
 
 package io.gbloch.meal.domain.event;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.debezium.outbox.quarkus.ExportedEvent;
+import io.gbloch.meal.domain.vo.IdBase;
+import java.time.Instant;
+import java.util.UUID;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -26,12 +32,17 @@ import lombok.Setter;
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-@Getter
 @Setter
-@NoArgsConstructor
-public abstract class DomainEvent<T> {
+@Getter
+@RequiredArgsConstructor
+public abstract class DomainEvent<ID extends IdBase<UUID>, T> implements ExportedEvent<String, JsonNode> {
 
-    protected EventHeader header;
-    protected String name;
-    protected T payload;
+    protected static ObjectMapper mapper = new ObjectMapper();
+
+    protected final EventHeader header;
+    protected final ID id;
+    protected final Instant timestamp;
+    protected final JsonNode payload;
+
+    protected T payloadObject;
 }

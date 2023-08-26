@@ -19,6 +19,8 @@ package io.gbloch.meal.customer.domain.service;
 import io.gbloch.meal.customer.domain.entity.Customer;
 import io.gbloch.meal.customer.domain.event.CustomerCreatedEvent;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -31,8 +33,13 @@ import lombok.extern.slf4j.Slf4j;
 @ApplicationScoped
 public final class CustomerDomainService {
 
+    @Inject
+    Event<CustomerCreatedEvent> event;
+
     public CustomerCreatedEvent createCustomer(Customer customer) {
         log.info("Customer with id: {} is initiated", customer.getId().getValue());
-        return new CustomerCreatedEvent(customer);
+        CustomerCreatedEvent customerCreatedEvent = CustomerCreatedEvent.of(customer);
+        this.event.fire(customerCreatedEvent);
+        return customerCreatedEvent;
     }
 }

@@ -32,7 +32,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 /**
  * OrderResource.
@@ -42,12 +42,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @ApplicationScoped
 @RequiredArgsConstructor
-@Slf4j
 @Path("api/v1/customers")
 @Produces("application/vnd.api.v1+json")
 @Consumes(MediaType.APPLICATION_JSON)
 public final class CustomerResource {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(CustomerResource.class);
     private final CreateCustomerUseCase createCustomerUseCase;
     private final GetCustomerUseCase getCustomerUseCase;
 

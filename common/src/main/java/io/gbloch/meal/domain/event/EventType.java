@@ -16,15 +16,12 @@
 
 package io.gbloch.meal.domain.event;
 
-import io.gbloch.meal.domain.vo.IdBase;
-import java.util.UUID;
-
 /**
- * DomainEventPublisher.
+ * EventType.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 15/05/2023
  */
-public interface DomainEventPublisher<ID extends IdBase<UUID>, T, E extends DomainEvent<ID, T>> {
-    void publish(E event);
+public enum EventType {
+    CUSTOMER_CREATED,
 }

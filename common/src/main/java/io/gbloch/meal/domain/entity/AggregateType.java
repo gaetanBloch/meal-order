@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.event;
-
-import io.gbloch.meal.domain.vo.IdBase;
-import java.util.UUID;
+package io.gbloch.meal.domain.entity;
 
 /**
- * DomainEventPublisher.
+ * AggregateType.
  *
  * @author Gaëtan Bloch
- * <br>Created on 13/05/2023
+ * <br>Created on 15/05/2023
  */
-public interface DomainEventPublisher<ID extends IdBase<UUID>, T, E extends DomainEvent<ID, T>> {
-    void publish(E event);
+public enum AggregateType {
+    ORDER,
+    PAYMENT,
+    RESTAURANT,
+    CUSTOMER;
 }

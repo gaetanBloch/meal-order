@@ -18,8 +18,6 @@ package io.gbloch.meal.customer.infrastucture.mapper;
 
 import io.gbloch.meal.customer.domain.entity.Customer;
 import io.gbloch.meal.customer.infrastucture.entity.CustomerEntity;
-import io.gbloch.meal.domain.vo.CustomerId;
-import java.util.UUID;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package io.gbloch.meal.domain.event;
+package io.gbloch.meal.order.domain.vo;
 
 import io.gbloch.meal.domain.vo.IdBase;
 import java.util.UUID;
 
 /**
- * DomainEventPublisher.
+ * RestaurantId.
  *
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public interface DomainEventPublisher<ID extends IdBase<UUID>, T, E extends DomainEvent<ID, T>> {
-    void publish(E event);
+public final class RestaurantId extends IdBase<UUID> {
+
+    public RestaurantId(UUID value) {
+        super(value);
+    }
+
+    public RestaurantId() {
+        super(UUID.randomUUID());
+    }
 }

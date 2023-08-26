@@ -16,9 +16,16 @@
 
 package io.gbloch.meal.customer.domain.event;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.gbloch.meal.customer.domain.entity.Customer;
+import io.gbloch.meal.domain.entity.AggregateType;
 import io.gbloch.meal.domain.event.DomainEvent;
 import io.gbloch.meal.domain.event.EventHeader;
+import io.gbloch.meal.domain.event.EventType;
+import io.gbloch.meal.domain.vo.CustomerId;
+import java.time.Instant;
+import java.util.Map;
 
 /**
  * CustomerCreatedEvent.
@@ -26,13 +33,49 @@ import io.gbloch.meal.domain.event.EventHeader;
  * @author Gaëtan Bloch
  * <br>Created on 13/05/2023
  */
-public final class CustomerCreatedEvent extends DomainEvent<Customer> {
+public final class CustomerCreatedEvent extends DomainEvent<CustomerId, Customer> {
 
-    public static final String CUSTOMER_CREATED_EVENT = "CustomerCreatedEvent";
+    private CustomerCreatedEvent(CustomerId id, JsonNode payload) {
+        super(
+            EventHeader.of(),
+            id,
+            Instant.now(),
+            payload
+        );
+    }
 
-    public CustomerCreatedEvent(Customer payload) {
-        this.setName(CUSTOMER_CREATED_EVENT);
-        this.setPayload(payload);
-        this.setHeader(EventHeader.of());
+    public static CustomerCreatedEvent of(Customer customer) {
+//        ObjectNode asJson = mapper.convertValue(customer, ObjectNode.class);
+        ObjectNode asJson = mapper.createObjectNode()
+            .put("id", customer.getId().getValue().toString())
+            .put("userName", customer.getIdentity().userName())
+            .put("firstName", customer.getIdentity().firstName())
+            .put("lastName", customer.getIdentity().lastName());
+        return new CustomerCreatedEvent(customer.getId(), asJson);
+    }
+
+    @Override
+    public String getAggregateId() {
+        return String.valueOf(this.id.getValue());
+    }
+
+    @Override
+    public String getAggregateType() {
+        return AggregateType.CUSTOMER.name();
+    }
+
+    @Override
+    public String getType() {
+        return EventType.CUSTOMER_CREATED.name();
+    }
+
+    @Override
+    public JsonNode getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Map<String, Object> getAdditionalFieldValues() {
+        return super.getAdditionalFieldValues();
     }
 }
